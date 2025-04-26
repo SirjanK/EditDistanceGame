@@ -1,6 +1,6 @@
 # Compiler settings
 CXX := g++
-CXXFLAGS := -Wall -Wextra -g
+CXXFLAGS := -Wall -Wextra -g -std=c++11
 
 # Files
 SRCS := finder.cpp main.cpp
