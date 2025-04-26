@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     const std::string word1 = argv[1];
     const std::string word2 = argv[2];
 
-    const auto& path = find_path(word1, word2);
+    const auto& path = FindPath(word1, word2);
 
     // Print the path with "->" between words
     if(path.empty()) {

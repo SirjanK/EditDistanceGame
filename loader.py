@@ -105,7 +105,7 @@ def save_graph(dictionary: List[str], adj_list: Dict[int, List[int]]) -> None:
     """
     Save as .bin file with:
     - First 4 bytes: uint32 node count
-    - Subsequent entries: node's neighbor count (uint16) + neighbor IDs (uint16s)
+    - Subsequent entries: node's neighbor count (uint32) + neighbor IDs (uint32)
 
     :param dictionary: List of words
     :param adj_list: Adjacency list where each index corresponds to a word and contains a list of indices of words that are one edit distance away
