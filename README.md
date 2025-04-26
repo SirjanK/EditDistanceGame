@@ -16,4 +16,4 @@ The C++ finder program finds the shortest path between two words in the graph. I
 
 The Loader has to run first to create the graph and dump to `data/` before running the finder.
 
-Invoke using: `./finder <word1> <word2>`.
+Compile by `make`, then invoke using `./finder <word1> <word2>`.
