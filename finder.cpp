@@ -106,6 +106,11 @@ const std::vector<std::uint32_t> BFS(uint32_t start, uint32_t end, const std::ve
             }
         }
     }
+
+    // If we didn't reach the end, return an empty vector
+    if (parent[end] == UINT32_MAX) {
+        return {};
+    }
     
     // Reconstruct the path
     std::vector<uint32_t> path;
