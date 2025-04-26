@@ -3,17 +3,14 @@
 #include <fstream>
 #include <cstdint>
 #include <stdexcept>
-#include <iostream>
 
 
 const std::vector<std::string> FindPath(std::string start, std::string end) {
     // Load words
     const auto& words = LoadWords(WORDS_FILE);
-    std::cout << "Loaded " << words.size() << " words.\n";
 
     // Load adjacency list
     const auto& adjacencyList = LoadAdjacencyList(ADJACENCY_LIST_FILE);
-    std::cout << "Loaded adjacency list with " << adjacencyList.size() << " nodes.\n";
 
     // Create a map from words to indices
     std::unordered_map<std::string, uint32_t> wordToIndex;
@@ -32,12 +29,6 @@ const std::vector<std::string> FindPath(std::string start, std::string end) {
 
     // Run BFS to find the shortest path
     const auto& pathIndices = BFS(startIndex, endIndex, adjacencyList);
-    // print path
-    std::cout << "Path indices: ";
-    for (const auto& index : pathIndices) {
-        std::cout << index << " ";
-    }
-    std::cout << "\n";
 
     // Translate the vector of indices back to words
     std::vector<std::string> path;
@@ -67,20 +58,22 @@ const std::vector<std::string> LoadWords(std::string filename) {
 
 const std::vector<std::vector<uint32_t>> LoadAdjacencyList(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
+    if(!file.is_open()) throw std::runtime_error("Cannot open graph.bin file");
+    
     uint32_t nodeCount;
     file.read(reinterpret_cast<char*>(&nodeCount), sizeof(nodeCount));
-    std::cout << "Node count: " << nodeCount << std::endl;
     
     std::vector<std::vector<uint32_t>> adjacencyList(nodeCount);
     
     for (uint32_t i = 0; i < nodeCount; ++i) {
         uint32_t neighborCount;
         file.read(reinterpret_cast<char*>(&neighborCount), sizeof(neighborCount));
-        std::cout << "Node " << i << " has " << neighborCount << " neighbors." << std::endl;
         
         std::vector<uint32_t> neighbors(neighborCount);
-        file.read(reinterpret_cast<char*>(neighbors.data()), 
-                 neighborCount * sizeof(uint32_t));
+        if (neighborCount > 0) {
+            file.read(reinterpret_cast<char*>(neighbors.data()), 
+                     neighborCount * sizeof(uint32_t));
+        }
         
         adjacencyList[i] = std::move(neighbors);
     }

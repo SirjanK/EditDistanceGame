@@ -3,7 +3,7 @@
 
 
 static constexpr const char* WORDS_FILE = "data/words.txt";
-static constexpr const char* ADJACENCY_LIST_FILE = "data/adjacency_list.bin";
+static constexpr const char* ADJACENCY_LIST_FILE = "data/graph.bin";
 
 
 /// \brief Finds the shortest path between two words in the edit distance graph.

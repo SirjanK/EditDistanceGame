@@ -35,7 +35,9 @@ def get_dictionary() -> List[str]:
 
     with open("dictionary.txt", "r") as file:
         words = file.read().splitlines()
-    return sorted([word.strip().lower() for word in words])
+    # get a set of words to remove duplicates
+    words = set([word.strip().lower() for word in words])
+    return sorted(words)
 
 
 def construct_dictionary_index(dictionary: List[str]) -> Dict[str, List[int]]:
